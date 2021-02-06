@@ -16,6 +16,12 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'simple_form'
 gem 'kaminari'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+gem "select2-rails"
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
+gem 'carrierwave', '~> 2.0'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

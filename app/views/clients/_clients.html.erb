@@ -1,0 +1,41 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :id, "#id") %></th>
+      <th><%= sort_link(@q, :imie, "Imię") %></th>
+      <th><%= sort_link(@q, :nazwisko, "Nazwisko") %></th>
+      <th><%= sort_link(@q, :email, "Email") %></th>
+      <th><%= sort_link(@q, :numer_telefonu, "Numer telefonu") %></th>
+      <th><%= sort_link(@q, :miasto, "Miasto") %></th>
+      <th><%= sort_link(@q, :created_at, "Data utworzenia") %></th>
+      <th width="200">Opcje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clients.each do |client| %>
+    <tr>
+      <td><%= client.id %></td>
+      <td><%= link_to client.imie, client %></td>
+      <td><%= link_to client.nazwisko, client %></td>
+      <td>
+        <%= link_to "#" do %>
+          <span class="badge badge-primary"><%= client.email %></span>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to "#" do %>
+          <span class="badge badge-primary"><%= client.numer_telefonu %></span>
+        <% end %>
+      </td>
+      <td><%= link_to client.miasto, client %></td>
+      <td><%= link_to client.created_at, client %></td>
+      <td>
+        <%= link_to 'Pokaż', client, class: "btn btn-sm btn-primary" %>
+        <%= link_to 'Edytuj', edit_client_path(client), class: "btn btn-sm btn-warning" %>
+        <%= link_to 'Usuń', client, method: :delete, data: { confirm: 'Czy na pewno usunąć?' }, class: "btn btn-sm btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @clients %>

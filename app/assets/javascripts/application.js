@@ -21,3 +21,12 @@
 //= require metisMenu/jquery.metisMenu.js
 //= require inspinia.js
 
+$(document).ready(function() {
+  $('.select2').select2({
+    allowClear: true,
+    theme: "bootstrap",
+    language: "pl-PL",
+    tags: true,
+    tokenSeparators: [',', ' ']
+  });
+});
