@@ -1,6 +1,37 @@
-<h1>Editing Client</h1>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Edytuj klienta</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= clients_path %>">Baza klientów</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= client_path(@client) %>">Klient</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Edytuj</strong>
+      </li>
+    </ol>
+  </div>
+</div>
 
-<%= render 'form', client: @client %>
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Edytuj klienta</h3>
+    <div class="ibox-tools">
+      <%= link_to clients_path, class: "btn btn-sm btn-primary" do %>
+        Anuluj
+      <% end %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= render 'form' %>
+  </div>
+</div>
 
-<%= link_to 'Show', @client %> |
-<%= link_to 'Back', clients_path %>
+<%= content_for :searchbar do %>
+
+<% end %>
