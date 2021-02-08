@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :id, "#id") %></th>
+      <th><%= sort_link(@q, :name, "Nazwa") %></th>
+      <th><%= sort_link(@q, :created_at, "Data utworzenia") %></th>
+      <th width="200">Opcje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @partners.each do |partner| %>
+    <tr>
+      <td><%= partner.id %></td>
+      <td><%= link_to partner.name, partner %></td>
+      <td><%= link_to partner.created_at, partner %></td>
+      <td>
+        <%= link_to 'Pokaż', partner, class: "btn btn-sm btn-primary" %>
+        <%= link_to 'Edytuj', edit_partner_path(partner), class: "btn btn-sm btn-warning" %>
+        <%= link_to 'Usuń', partner, method: :delete, data: { confirm: 'Czy na pewno usunąć?' }, class: "btn btn-sm btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @partners %>

@@ -5,7 +5,8 @@ class PartnersController < ApplicationController
   # GET /partners
   # GET /partners.json
   def index
-    @partners = Partner.all
+    @q = Partner.ransack(params[:q])
+    @partners = @q.result(distinct: true).page params[:page]
   end
 
   # GET /partners/1
