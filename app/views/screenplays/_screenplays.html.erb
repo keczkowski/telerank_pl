@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :id, "#id") %></th>
+      <th><%= sort_link(@q, :partner, "Partner") %></th>
+      <th><%= sort_link(@q, :name, "Nazwa") %></th>
+      <th><%= sort_link(@q, :created_at, "Data utworzenia") %></th>
+      <th width="200">Opcje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @screenplays.each do |screenplay| %>
+    <tr>
+      <td><%= screenplay.id %></td>
+      <td><%= link_to screenplay.name, screenplay %></td>
+      <td><%= link_to screenplay.partner.name, screenplay.partner %></td>
+      <td><%= link_to screenplay.created_at, screenplay %></td>
+      <td>
+        <%= link_to 'Pokaż', screenplay, class: "btn btn-sm btn-primary" %>
+        <%= link_to 'Edytuj', edit_screenplay_path(screenplay), class: "btn btn-sm btn-warning" %>
+        <%= link_to 'Usuń', screenplay, method: :delete, data: { confirm: 'Czy na pewno usunąć?' }, class: "btn btn-sm btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @screenplays %>

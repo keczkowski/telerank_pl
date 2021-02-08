@@ -1,29 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Baza scenariuszy</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Baza scenariuszy</strong>
+      </li>
+    </ol>
+  </div>
+</div>
 
-<h1>Screenplays</h1>
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Baza scenariuszy</h3>
+    <div class="ibox-tools">
+      <%= link_to new_screenplay_path, class: "btn btn-sm btn-primary" do %>
+        <i class="fa fa-plus"></i> Dodaj scenariusz
+      <% end %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= render 'screenplays' %>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @screenplays.each do |screenplay| %>
-      <tr>
-        <td><%= screenplay.name %></td>
-        <td><%= screenplay.body %></td>
-        <td><%= link_to 'Show', screenplay %></td>
-        <td><%= link_to 'Edit', edit_screenplay_path(screenplay) %></td>
-        <td><%= link_to 'Destroy', screenplay, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Screenplay', new_screenplay_path %>
+<%= content_for :searchbar do %>
+  <%= search_form_for @q, class: "navbar-form-custom" do |f| %>
+    <div class="form-group">
+        <%= f.search_field :name_cont, placeholder: "Wyszukaj scenariusz", id: "top-search", class: "form-control" %>
+    </div>
+  <% end %>
+<% end %>

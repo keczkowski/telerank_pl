@@ -5,7 +5,8 @@ class ScreenplaysController < ApplicationController
   # GET /screenplays
   # GET /screenplays.json
   def index
-    @screenplays = Screenplay.all
+    @q = Screenplay.ransack(params[:q])
+    @screenplays = @q.result(distinct: true).page params[:page]
   end
 
   # GET /screenplays/1
@@ -29,7 +30,7 @@ class ScreenplaysController < ApplicationController
 
     respond_to do |format|
       if @screenplay.save
-        format.html { redirect_to @screenplay, notice: 'Screenplay was successfully created.' }
+        format.html { redirect_to @screenplay, notice: 'Scenariusz został dodany do bazy.' }
         format.json { render :show, status: :created, location: @screenplay }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class ScreenplaysController < ApplicationController
   def update
     respond_to do |format|
       if @screenplay.update(screenplay_params)
-        format.html { redirect_to @screenplay, notice: 'Screenplay was successfully updated.' }
+        format.html { redirect_to @screenplay, notice: 'Scenariusz został zaktualizowany.' }
         format.json { render :show, status: :ok, location: @screenplay }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class ScreenplaysController < ApplicationController
   def destroy
     @screenplay.destroy
     respond_to do |format|
-      format.html { redirect_to screenplays_url, notice: 'Screenplay was successfully destroyed.' }
+      format.html { redirect_to screenplays_url, notice: 'Scenariusz został usunięty.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +71,6 @@ class ScreenplaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def screenplay_params
-      params.require(:screenplay).permit(:name, :body)
+      params.require(:screenplay).permit(:name, :body, :partner_id)
     end
 end
