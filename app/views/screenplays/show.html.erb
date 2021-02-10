@@ -36,9 +36,100 @@
       <strong>Nazwa:</strong>
       <%= @screenplay.name %>
     </p>
+    <p>
+      <strong>Opis:</strong>
+      <%= @screenplay.body %>
+    </p>
   </div>
 </div>
 
-<%= content_for :searchbar do %>
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Pytania</h3>
+    <div class="ibox-tools">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newModalCenter">
+        Dodaj pytanie
+      </button>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <table class=table>
+      <tr>
+        <th>Kolejność</th>
+        <th>Pytanie</th>
+        <th>Treść</th>
+        <th width="280">Opcje</th>
+      </tr>
+      <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.sequence %></td>
+        <td><%= question.name %></td>
+        <td><%= question.body %></td>
+        <td>
+          <%= link_to "W górę", up_path(id: question.id), class: "btn btn-mini btn-primary" %>
+          <%= link_to "W dół", down_path(id: question.id), class: "btn btn-mini btn-primary" %>
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModalCenter<%= question.id %>">
+            Edytuj
+          </button>
+          <%= link_to 'Usuń', question, class: "btn btn-mini btn-danger", method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć to pytanie?' } %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newModalCenter" tabindex="-1" role="dialog" aria-labelledby="newModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dodaj nowe pytanie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for(@question) do |f| %>
+      <div class="modal-body">
+        <%= f.input :screenplay_id, as: :hidden, input_html: { value: @screenplay.id} %>
+        <%= f.input :name, label: "Nazwa" %>
+        <%= f.input :body, label: "Treść" %>
+        <%= f.input :sequence, label: "Kolejność" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <%= f.button :submit, "Dodaj", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% @questions.each do |question| %>
+
+<!-- Modal -->
+<div class="modal fade" id="editModalCenter<%= question.id %>" tabindex="-1" role="dialog" aria-labelledby="editModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dodaj nowe pytanie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for(question) do |f| %>
+      <div class="modal-body">
+        <%= f.input :name, label: "Nazwa" %>
+        <%= f.input :body, label: "Treść" %>
+        <%= f.input :sequence, label: "Kolejność" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <% end %>

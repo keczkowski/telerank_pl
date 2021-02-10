@@ -12,6 +12,8 @@ class ScreenplaysController < ApplicationController
   # GET /screenplays/1
   # GET /screenplays/1.json
   def show
+    @question = Question.new
+    @questions = @screenplay.questions.order(:sequence)
   end
 
   # GET /screenplays/new
