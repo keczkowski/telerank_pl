@@ -4,8 +4,8 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :body %>
+    <%= f.input :name, label: "Nazwa" %>
+    <%= f.input :body, label: "Treść" %>
     <%= f.association :partner, input_html: { class: "select2" } %>
   </div>
 

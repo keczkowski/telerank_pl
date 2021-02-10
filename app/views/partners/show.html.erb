@@ -35,6 +35,36 @@
   </div>
 </div>
 
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Scenariusze</h3>
+    <div class="ibox-tools">
+      <%= link_to "Dodaj scenariusz", new_screenplay_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <table class=table>
+      <tr>
+        <th>#id</th>
+        <th>Nazwa</th>
+        <th>Treść</th>
+        <th width="150">Opcje</th>
+      </tr>
+      <% @partner.screenplays.each do |screenplay| %>
+      <tr>
+        <td><%= screenplay.id %></td>
+        <td><%= screenplay.name %></td>
+        <td><%= screenplay.body %></td>
+        <td>
+          <%= link_to "Edytuj", edit_screenplay_path(screenplay), class: "btn btn-mini btn-warning" %>
+          <%= link_to 'Usuń', screenplay, class: "btn btn-mini btn-danger", method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć to pytanie?' } %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
 <%= content_for :searchbar do %>
 
 <% end %>

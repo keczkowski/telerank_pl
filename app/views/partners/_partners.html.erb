@@ -3,6 +3,7 @@
     <tr>
       <th><%= sort_link(@q, :id, "#id") %></th>
       <th><%= sort_link(@q, :name, "Nazwa") %></th>
+      <th><%= sort_link(@q, :partners, "Scenariusze") %></th>
       <th><%= sort_link(@q, :created_at, "Data utworzenia") %></th>
       <th width="200">Opcje</th>
     </tr>
@@ -12,6 +13,7 @@
     <tr>
       <td><%= partner.id %></td>
       <td><%= link_to partner.name, partner %></td>
+      <td><%= link_to partner.screenplays.count, partner %></td>
       <td><%= link_to partner.created_at, partner %></td>
       <td>
         <%= link_to 'Pokaż', partner, class: "btn btn-sm btn-primary" %>
