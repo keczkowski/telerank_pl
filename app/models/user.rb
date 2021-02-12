@@ -4,7 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :calls
-  has_many :reminders
-  has_many :agreements
+  has_many :restrict_with_error
+  has_many :restrict_with_error
+  has_many :restrict_with_error
+
+  def name
+    email
+  end
 end

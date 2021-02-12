@@ -6,7 +6,10 @@
         <a href="<%= root_path %>">Strona Główna</a>
       </li>
       <li class="breadcrumb-item">
-        <a href="<%= calls_path %>">Baza rozmów</a>
+        <a href="<%= clients_path %>">Baza klientów</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= client_path(@client) %>"><%= @client.imie %> <%= @client.nazwisko %></a>
       </li>
       <li class="breadcrumb-item active">
         <strong>Rozmowa #<%= @call.id %>: <%= @screenplay.name %></strong>
@@ -16,7 +19,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div class="ibox">
       <div class="ibox-title">
         <h3>Rozmowa</h3>
@@ -67,6 +70,73 @@
         <%= f.input :status, label: "Zmień status po zakończeniu czynności", hint: "Nie zapomnij uzupełnić Statusu", collection: ["Uzupełniono wszystkie dane (Sukces)", "Brak zainteresowania ofertą (Porażka)", "Prośba o kontakt później", "Klient nie odebrał"], input_html: { class: "select2" } %>
         <%= f.submit "Zmień status", class: "btn btn-mini btn-primary" %>
         <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Klient</h3>
+        <div class="ibox-tools">
+        </div>
+      </div>
+      <div class="ibox-content">
+        <p>
+          <strong>Imie:</strong>
+          <%= @client.imie %>
+        </p>
+
+        <p>
+          <strong>Nazwisko:</strong>
+          <%= @client.nazwisko %>
+        </p>
+
+        <p>
+          <strong>Numer telefonu:</strong>
+          <%= @client.numer_telefonu %>
+        </p>
+
+        <p>
+          <strong>Email:</strong>
+          <%= @client.email %>
+        </p>
+
+        <p>
+          <strong>Miasto:</strong>
+          <%= @client.miasto %>
+        </p>
+
+        <p>
+          <strong>Kod:</strong>
+          <%= @client.kod %>
+        </p>
+
+        <p>
+          <strong>Adres:</strong>
+          <%= @client.adres %>
+        </p>
+      </div>
+    </div>
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Przypomnienia</h3>
+        <div class="ibox-tools">
+          Dodaj przypomnienie
+        </div>
+      </div>
+      <div class="ibox-content">
+        Aktywne przypomnienia | Oznacz jako wykonane
+      </div>
+    </div>
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Umowy</h3>
+        <div class="ibox-tools">
+          Narzędzia
+        </div>
+      </div>
+      <div class="ibox-content">
+        Umowy
       </div>
     </div>
   </div>

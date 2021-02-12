@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Użytkownik</th>
+      <th>Klient</th>
+      <th>Scenariusz</th>
+      <th>Status</th>
+      <th>Data</th>
+      <th</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @calls.each do |call| %>
+      <tr>
+        <td><%= link_to "##{call.id}", call %></td>
+        <td><%= link_to call.user.name, call.user %></td>
+        <td><%= link_to call.client.name, call.client %></td>
+        <td><%= link_to call.screenplay.name, call.screenplay %></td>
+        <td><%= call.status.present? ? call.status : "-" %></td>
+        <td><%= call.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+        <td width="200">
+          <%= link_to 'Pokaż', call, class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Edytuj', edit_call_path(call), class: "btn btn-sm btn-warning" %>
+          <%= link_to 'Usuń', call, method: :delete, data: { confirm: 'Czy na pewno usunąć?' }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @calls %>

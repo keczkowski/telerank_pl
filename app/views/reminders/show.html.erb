@@ -1,29 +1,53 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Remind at:</strong>
-  <%= @reminder.remind_at %>
-</p>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Przypomnienie</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= reminders_path %>">Baza przypomnień</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Przypomnienie</strong>
+      </li>
+    </ol>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @reminder.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @reminder.user_id %>
-</p>
-
-<p>
-  <strong>Client:</strong>
-  <%= @reminder.client_id %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @reminder.body %>
-</p>
-
-<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
-<%= link_to 'Back', reminders_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Informacje</h3>
+        <div class="ibox-tools">
+          <%= link_to 'Edytuj', edit_reminder_path(@reminder), class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Cofnij', reminders_path, class: "btn btn-sm btn-primary" %>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <p>
+          <strong>Data przypomnienia:</strong>
+          <%= @reminder.remind_at.strftime("%d/%m/%Y %H:%M") %>
+        </p>
+        <p>
+          <strong>Nazwa przypomnienia:</strong>
+          <%= @reminder.name %>
+        </p>
+        <p>
+          <strong>Uwagi:</strong>
+          <%= @reminder.body %>
+        </p>
+        <p>
+          <strong>Użytkownik:</strong>
+          <%= link_to @reminder.user.name, @reminder.user %>
+        </p>
+        <p>
+          <strong>Klient:</strong>
+          <%= link_to @reminder.client.name, @reminder.client %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

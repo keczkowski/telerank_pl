@@ -1,0 +1,32 @@
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Data przypomnienia</th>
+      <th>Nazwa przypomnienia</th>
+      <th>Użytkownik</th>
+      <th>Klient</th>
+      <th width="200"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reminders.each do |reminder| %>
+    <tr>
+      <td><%= link_to "##{reminder.id}", reminder %></td>
+      <td><%= link_to reminder.remind_at.strftime("%d/%m/%Y %H:%M"), reminder %></td>
+      <td><%= link_to reminder.name, reminder %></td>
+      <td><%= link_to reminder.user.name, reminder.user %></td>
+      <td><%= link_to reminder.client.name, reminder.client %></td>
+      <td>
+        <%= link_to 'Pokaż', reminder, class: "btn btn-sm btn-primary" %>
+        <%= link_to 'Edytuj', edit_reminder_path(reminder), class: "btn btn-sm btn-warning" %>
+        <%= link_to 'Usuń', reminder, method: :delete, data: { confirm: 'Czy na pewno usunąć?' }, class: "btn btn-sm btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @reminders %>

@@ -4,14 +4,14 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :remind_at %>
-    <%= f.input :name %>
-    <%= f.input :user_id %>
-    <%= f.input :client_id %>
-    <%= f.input :body %>
+    <%= f.input :remind_at, label: "Data przypomnienia" %>
+    <%= f.input :name, label: "Nazwa przypomnienia" %>
+    <%= f.input :body, label: "Uwagi" %>
+    <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+    <%= f.association :client, label: "Klient" %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
   </div>
 <% end %>

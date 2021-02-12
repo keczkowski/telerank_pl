@@ -5,7 +5,8 @@ class AgreementsController < ApplicationController
   # GET /agreements
   # GET /agreements.json
   def index
-    @agreements = Agreement.all
+    @q = Agreement.ransack(params[:q])
+    @agreements = @q.result(distinct: true).page params[:page]
   end
 
   # GET /agreements/1

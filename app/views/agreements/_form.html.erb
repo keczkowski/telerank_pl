@@ -4,15 +4,15 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :body %>
-    <%= f.input :user_id %>
-    <%= f.input :client_id %>
-    <%= f.input :partner_id %>
-    <%= f.input :screenplay_id %>
+    <%= f.input :name, label: "Numer umowy" %>
+    <%= f.input :body, label: "Uwagi" %>
+    <%= f.association :user, label: "Użytkownik" %>
+    <%= f.association :client, label: "Klient" %>
+    <%= f.association :partner, label: "Partner" %>
+    <%= f.association :call, label: "Rozmowa" %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
   </div>
 <% end %>

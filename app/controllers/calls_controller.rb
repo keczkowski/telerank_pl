@@ -5,7 +5,8 @@ class CallsController < ApplicationController
   # GET /calls
   # GET /calls.json
   def index
-    @calls = Call.all
+    @q = Call.ransack(params[:q])
+    @calls = @q.result(distinct: true).page params[:page]
   end
 
   # GET /calls/1
@@ -31,7 +32,15 @@ class CallsController < ApplicationController
 
     respond_to do |format|
       if @call.save
-        format.html { redirect_to @call }
+        format.html {
+          url = Rails.application.routes.recognize_path(request.referrer)
+          last_controller = url[:controller]
+          if last_controller == "clients"
+            redirect_to client_call_path(client_id: @call.client_id, call_id: @call.id)
+          else
+            redirect_to @call
+          end
+        }
         format.json { render :show, status: :created, location: @call }
       else
         format.html { render :new }

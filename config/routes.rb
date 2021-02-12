@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :screenplays
   resources :questions
   resources :partners
-  resources :clients
+  resources :clients do
+    get 'call/:call_id' => "clients#call", as: "call"
+  end
+  resources :users
   devise_for :users
   get "home/index"
   get "home/minor"

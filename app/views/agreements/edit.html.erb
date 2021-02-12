@@ -1,6 +1,37 @@
-<h1>Editing Agreement</h1>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Edytuj umowę</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= agreements_path %>">Baza umów</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= agreement_path(@agreement) %>">Umowa: <%= @agreement.name %></a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Edytuj</strong>
+      </li>
+    </ol>
+  </div>
+</div>
 
-<%= render 'form', agreement: @agreement %>
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Edytuj umowę</h3>
+    <div class="ibox-tools">
+      <%= link_to agreements_path, class: "btn btn-sm btn-primary" do %>
+        Anuluj
+      <% end %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= render 'form' %>
+  </div>
+</div>
 
-<%= link_to 'Show', @agreement %> |
-<%= link_to 'Back', agreements_path %>
+<%= content_for :searchbar do %>
+
+<% end %>

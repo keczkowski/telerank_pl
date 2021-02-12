@@ -17,6 +17,12 @@ class ClientsController < ApplicationController
     @agreement = Agreement.new
   end
 
+  def call
+    @call = Call.find(params[:call_id])
+    @client = @call.client
+    @screenplay = @call.screenplay
+  end
+
   # GET /clients/new
   def new
     @client = Client.new

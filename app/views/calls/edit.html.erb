@@ -1,6 +1,37 @@
-<h1>Editing Call</h1>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Edytuj rozmowę</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= calls_path %>">Baza rozmów</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= call_path(@call) %>">Rozmowa <%= @call.name %></a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Edytuj</strong>
+      </li>
+    </ol>
+  </div>
+</div>
 
-<%= render 'form', call: @call %>
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Edytuj rozmowę</h3>
+    <div class="ibox-tools">
+      <%= link_to calls_path, class: "btn btn-sm btn-primary" do %>
+        Anuluj
+      <% end %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= render 'form' %>
+  </div>
+</div>
 
-<%= link_to 'Show', @call %> |
-<%= link_to 'Back', calls_path %>
+<%= content_for :searchbar do %>
+
+<% end %>

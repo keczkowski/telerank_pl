@@ -5,7 +5,8 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.json
   def index
-    @reminders = Reminder.all
+    @q = Reminder.ransack(params[:q])
+    @reminders = @q.result(distinct: true).page params[:page]
   end
 
   # GET /reminders/1
@@ -29,7 +30,7 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @reminder.save
-        format.html { redirect_back(fallback_location: root_path) }
+        format.html { redirect_back(fallback_location: root_path, notice: "Dodano nowe przypomnienie do bazy danych.") }
         format.json { render :show, status: :created, location: @reminder }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class RemindersController < ApplicationController
   def update
     respond_to do |format|
       if @reminder.update(reminder_params)
-        format.html { redirect_back(fallback_location: root_path) }
+        format.html { redirect_back(fallback_location: root_path, notice: "Zmienieno przypomnienie w bazie danych.") }
         format.json { render :show, status: :ok, location: @reminder }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class RemindersController < ApplicationController
   def destroy
     @reminder.destroy
     respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path) }
+      format.html { redirect_back(fallback_location: root_path, notice: "Usunięto przypomnienie z bazy danych.") }
       format.json { head :no_content }
     end
   end

@@ -1,33 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Baza rozmów</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Baza rozmów</strong>
+      </li>
+    </ol>
+  </div>
+</div>
 
-<h1>Calls</h1>
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Baza rozmów</h3>
+    <div class="ibox-tools">
+      <%= link_to new_call_path, class: "btn btn-sm btn-primary" do %>
+      <i class="fa fa-plus"></i> Dodaj rozmowę
+      <% end %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= render 'calls' %>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Client</th>
-      <th>Screenplay</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @calls.each do |call| %>
-      <tr>
-        <td><%= call.user_id %></td>
-        <td><%= call.client_id %></td>
-        <td><%= call.screenplay_id %></td>
-        <td><%= call.status %></td>
-        <td><%= link_to 'Show', call %></td>
-        <td><%= link_to 'Edit', edit_call_path(call) %></td>
-        <td><%= link_to 'Destroy', call, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Call', new_call_path %>
+<%= content_for :searchbar do %>
+<%= search_form_for @q, class: "navbar-form-custom" do |f| %>
+  <div class="form-group">
+      <%= f.search_field :client_nazwisko_or_client_imie_or_user_email_or_screenplay_name_cont, placeholder: "Wyszukaj rozmowę", id: "top-search", class: "form-control" %>
+  </div>
+<% end %>
+<% end %>
