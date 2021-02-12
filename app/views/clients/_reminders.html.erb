@@ -1,0 +1,51 @@
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Przypomnienia</h3>
+    <div class="ibox-tools">
+      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newReminderModalCenter">
+        <i class="fa fa-calendar"></i> Dodaj
+      </button>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <table>
+      <% @client.reminders.order(:remind_at).each do |reminder| %>
+        <tr>
+          <td><%= reminder.done ? "✓" : "x" %></td>
+          <td><a href="#" style="color:black;" data-toggle="modal" data-target="#editReminderModalCenter<%= reminder.id %>"><%= reminder.name %></a></td>
+          <td><%= reminder.remind_at.strftime("%m/%d/%Y %H:%M") %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<% @client.reminders.order(:remind_at).each do |reminder| %>
+  <!-- Modal Przypomnienie -->
+  <div class="modal fade" id="editReminderModalCenter<%= reminder.id %>" tabindex="-1" role="dialog" aria-labelledby="editReminderModalCenterTitle<%= reminder.id %>" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Edytuj przypomnienie</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= simple_form_for(reminder) do |f| %>
+        <div class="modal-body">
+          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.input :client_id, as: :hidden, input_html: { value: @client.id } %>
+          <%= f.input :name, label: "Treść przypomnienia", as: :text %>
+          <%= f.input :remind_at, label: "Data przypomnienia" %>
+          <%= f.input :done, label: "Wykonane", as: :boolean %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+          <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
+          <%= link_to 'Usuń przypomnienie', reminder, method: :delete, class: "btn btn-sm btn-danger", data: { confirm: 'Czy na pewno usunąć to przypomnienie?' } %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

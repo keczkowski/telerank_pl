@@ -13,6 +13,7 @@ class ClientsController < ApplicationController
   # GET /clients/1.json
   def show
     @call = Call.new
+    @reminder = Reminder.new
   end
 
   # GET /clients/new

@@ -1,4 +1,5 @@
 class RemindersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reminder, only: [:show, :edit, :update, :destroy]
 
   # GET /reminders
@@ -28,7 +29,7 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @reminder.save
-        format.html { redirect_to @reminder, notice: 'Reminder was successfully created.' }
+        format.html { redirect_back(fallback_location: root_path) }
         format.json { render :show, status: :created, location: @reminder }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class RemindersController < ApplicationController
   def update
     respond_to do |format|
       if @reminder.update(reminder_params)
-        format.html { redirect_to @reminder, notice: 'Reminder was successfully updated.' }
+        format.html { redirect_back(fallback_location: root_path) }
         format.json { render :show, status: :ok, location: @reminder }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class RemindersController < ApplicationController
   def destroy
     @reminder.destroy
     respond_to do |format|
-      format.html { redirect_to reminders_url, notice: 'Reminder was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: root_path) }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,6 @@ class RemindersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reminder_params
-      params.require(:reminder).permit(:remind_at, :name, :user_id, :client_id, :body)
+      params.require(:reminder).permit(:remind_at, :name, :user_id, :client_id, :body, :done)
     end
 end

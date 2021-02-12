@@ -37,6 +37,11 @@
         <i class="fa fa-address-card"></i> <span class="nav-label">Klienci</span>
         <% end %>
       </li>
+      <li class="<%= 'active' if controller_name == "agreements" %>">
+        <%= link_to "#" do %>
+        <i class="fa fa-money"></i> <span class="nav-label">Umowy</span>
+        <% end %>
+      </li>
       <li class="<%= 'active' if controller_name == "calls" %>">
         <%= link_to calls_path do %>
         <i class="fa fa-phone"></i> <span class="nav-label">Rozmowy</span>
@@ -44,7 +49,7 @@
       </li>
       <li class="<%= 'active' if controller_name == "reminders" %>">
         <%= link_to reminders_path do %>
-        <i class="fa fa-tasks"></i> <span class="nav-label">Rozmowy</span>
+        <i class="fa fa-tasks"></i> <span class="nav-label">Przypomnienia</span>
         <% end %>
       </li>
       <li class="">
