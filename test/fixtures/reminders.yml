@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  remind_at: 2021-02-12 15:41:17
+  name: MyString
+  user_id: 1
+  client_id: 1
+  body: MyText
+
+two:
+  remind_at: 2021-02-12 15:41:17
+  name: MyString
+  user_id: 1
+  client_id: 1
+  body: MyText

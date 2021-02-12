@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_123553) do
+ActiveRecord::Schema.define(version: 2021_02_12_144117) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "call_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "calls", force: :cascade do |t|
     t.integer "user_id"
@@ -44,6 +52,16 @@ ActiveRecord::Schema.define(version: 2021_02_12_123553) do
     t.string "name"
     t.text "body"
     t.integer "sequence"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reminders", force: :cascade do |t|
+    t.datetime "remind_at"
+    t.string "name"
+    t.integer "user_id"
+    t.integer "client_id"
+    t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

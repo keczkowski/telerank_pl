@@ -35,11 +35,40 @@
         </p>
         <hr>
         <% @screenplay.questions.order(:sequence).each do |question| %>
-          <p>
-            <strong><%= question.name %></strong><br />
-            <%= question.body %><br />
-            FORMULARZ | ZAPISZ/ZMIEŃ
-          </p>
+        <p>
+          <% @answer = Answer.where(question_id: question.id, call_id: @call.id).first %>
+          <% if @answer.present? %>
+          <%= simple_form_for(@answer) do |f| %>
+          <%= f.input :call_id, as: :hidden, input_html: { value: @call.id } %>
+          <%= f.input :question_id, as: :hidden, input_html: { value: question.id } %>
+          <%= f.input :name, label: question.body, input_html: { placeholder: question.name } %>
+          <%= f.submit "Zmień", class: "btn btn-sm btn-warning" %>
+          <%= link_to 'Usuń', @answer, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Czy na pewno usunąć tą odpowiedź?' } %>
+          <% end %>
+          <% else %>
+          <%= simple_form_for(Answer.new) do |f| %>
+          <%= f.input :call_id, as: :hidden, input_html: { value: @call.id } %>
+          <%= f.input :question_id, as: :hidden, input_html: { value: question.id } %>
+          <%= f.input :name, label: question.body, input_html: { placeholder: question.name } %>
+          <%= f.submit "Zapisz", class: "btn btn-sm btn-primary" %>
+          <% end %>
+          <% end %>
+        </p>
+        <hr>
+        <% end %>
+        <% @questions_count = @screenplay.questions.count %>
+        <% @answers_count = @call.answers.count %>
+        <% @progress = @questions_count > 0 ? @answers_count / @questions_count.to_f * 100 : 0 %>
+        <div class="progress">
+          <div class="progress-bar" style="width: <%= @progress %>%" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p>
+          Postęp: <%= @progress.round(2) %>% (<%= @answers_count %> / <%= @questions_count %>)
+        </p>
+        <hr>
+        <%= simple_form_for(@call) do |f| %>
+        <%= f.input :status, label: "Zmień status po zakończeniu czynności", hint: "Nie zapomnij uzupełnić Statusu", collection: ["Uzupełniono wszystkie dane (Sukces)", "Brak zainteresowania ofertą (Porażka)", "Prośba o kontakt później", "Klient nie odebrał"], input_html: { class: "select2" } %>
+        <%= f.submit "Zmień status", class: "btn btn-mini btn-primary" %>
         <% end %>
       </div>
     </div>
@@ -86,6 +115,17 @@
           <strong>Adres:</strong>
           <%= @client.adres %>
         </p>
+      </div>
+    </div>
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Przypomnienia</h3>
+        <div class="ibox-tools">
+          Dodaj przypomnienie
+        </div>
+      </div>
+      <div class="ibox-content">
+        Aktywne przypomnienia | Oznacz jako wykonane
       </div>
     </div>
     <div class="ibox">

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :reminders
+  resources :answers
   resources :calls
   resources :screenplays
   resources :questions

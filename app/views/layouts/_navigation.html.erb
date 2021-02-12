@@ -42,14 +42,14 @@
         <i class="fa fa-phone"></i> <span class="nav-label">Rozmowy</span>
         <% end %>
       </li>
-      <li class="">
-        <%= link_to "/home/minor" do %>
-        <i class="fa fa-calendar"></i> <span class="nav-label">Kalendarz</span>
+      <li class="<%= 'active' if controller_name == "reminders" %>">
+        <%= link_to reminders_path do %>
+        <i class="fa fa-tasks"></i> <span class="nav-label">Rozmowy</span>
         <% end %>
       </li>
       <li class="">
         <%= link_to "/home/minor" do %>
-        <i class="fa fa-tasks"></i> <span class="nav-label">Zadania</span>
+        <i class="fa fa-calendar"></i> <span class="nav-label">Zdarzenia</span>
         <% end %>
       </li>
       <li class="">
