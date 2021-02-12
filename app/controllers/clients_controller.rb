@@ -14,6 +14,7 @@ class ClientsController < ApplicationController
   def show
     @call = Call.new
     @reminder = Reminder.new
+    @agreement = Agreement.new
   end
 
   # GET /clients/new

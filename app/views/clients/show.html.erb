@@ -27,15 +27,15 @@
         <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#newCallModalCenter">
           <i class="fa fa-phone"></i> Rozpocznij rozmowę
         </button>
-        <%= link_to "Wyślij email", "#", class: "btn btn-lg btn-primary" %>
+        <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#editInfoModalCenter">
+          <i class="fa fa-edit"></i> Edytuj informacje
+        </button>
         <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#newReminderModalCenter">
           <i class="fa fa-calendar"></i> Dodaj przypomnienie
         </button>
-        <%= link_to "Dodaj przypomnienie", "#", class: "btn btn-lg btn-primary" %>
-        <%= link_to "Dodaj umowę", "#", class: "btn btn-lg btn-primary" %>
-        <%= link_to edit_client_path(@client), class: "btn btn-lg btn-primary" do %>
-        <i class="fa fa-edit"></i> Edytuj
-        <% end %>
+        <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#newAgreementModalCenter">
+          <i class="fa fa-money"></i> Dodaj umowę
+        </button>
       </div>
     </div>
     <%= render 'timeline' %>
@@ -88,6 +88,63 @@
         <%= f.input :client_id, as: :hidden, input_html: { value: @client.id } %>
         <%= f.input :name, label: "Treść" %>
         <%= f.input :remind_at, label: "Data przypomnienia" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <%= f.button :submit, "Dodaj", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Umowa -->
+<div class="modal fade" id="newAgreementModalCenter" tabindex="-1" role="dialog" aria-labelledby="newAgreementModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dodaj umowę</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for(@agreement) do |f| %>
+      <div class="modal-body">
+        <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :client_id, as: :hidden, input_html: { value: @client.id } %>
+        <%= f.association :partner %>
+        <%= f.association :call, label: "Rozmowa" %>
+        <%= f.input :name, label: "Numer umowy" %>
+        <%= f.input :body, label: "Uwagi" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <%= f.button :submit, "Dodaj", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Umowa -->
+<div class="modal fade" id="editInfoModalCenter" tabindex="-1" role="dialog" aria-labelledby="editInfoModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edytuj info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for(@client) do |f| %>
+      <div class="modal-body">
+        <%= f.input :imie %>
+        <%= f.input :nazwisko %>
+        <%= f.input :numer_telefonu %>
+        <%= f.input :email %>
+        <%= f.input :miasto %>
+        <%= f.input :kod %>
+        <%= f.input :adres %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>

@@ -8,12 +8,12 @@
     </div>
   </div>
   <div class="ibox-content">
-    <table>
+    <table style="width:100%">
       <% @client.reminders.order(:remind_at).each do |reminder| %>
         <tr>
           <td><%= reminder.done ? "✓" : "x" %></td>
           <td><a href="#" style="color:black;" data-toggle="modal" data-target="#editReminderModalCenter<%= reminder.id %>"><%= reminder.name %></a></td>
-          <td><%= reminder.remind_at.strftime("%m/%d/%Y %H:%M") %></td>
+          <td><%= reminder.remind_at.strftime("%d/%m/%Y %H:%M") %></td>
         </tr>
       <% end %>
     </table>
@@ -42,7 +42,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
           <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
-          <%= link_to 'Usuń przypomnienie', reminder, method: :delete, class: "btn btn-sm btn-danger", data: { confirm: 'Czy na pewno usunąć to przypomnienie?' } %>
+          <%= link_to 'Usuń przypomnienie', reminder, method: :delete, class: "btn btn-danger", data: { confirm: 'Czy na pewno usunąć to przypomnienie?' } %>
         </div>
         <% end %>
       </div>

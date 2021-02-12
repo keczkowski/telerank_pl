@@ -2,10 +2,51 @@
   <div class="ibox-title">
     <h3>Umowy</h3>
     <div class="ibox-tools">
-      Narzędzia
+      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newAgreementModalCenter">
+        <i class="fa fa-money"></i> Dodaj
+      </button>
     </div>
   </div>
   <div class="ibox-content">
-    Umowy
+    <table style="width:100%">
+      <% @client.agreements.each do |agreement| %>
+      <tr>
+        <td><a href="#" style="color:black;" data-toggle="modal" data-target="#editAgreementModalCenter<%= agreement.id %>"><%= agreement.name %></a></td>
+        <td><%= agreement.partner.name if agreement.partner.present? %></td>
+        <td><%= agreement.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 </div>
+
+<% @client.agreements.each do |agreement| %>
+  <!-- Modal Umowa -->
+  <div class="modal fade" id="editAgreementModalCenter<%= agreement.id %>" tabindex="-1" role="dialog" aria-labelledby="editAgreementModalCenterTitle<%= agreement.id %>" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Edytuj umowę</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= simple_form_for(agreement) do |f| %>
+        <div class="modal-body">
+          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.input :client_id, as: :hidden, input_html: { value: @client.id } %>
+          <%= f.association :partner %>
+          <%= f.association :call, label: "Rozmowa" %>
+          <%= f.input :name, label: "Numer umowy" %>
+          <%= f.input :body, label: "Uwagi" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+          <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
+          <%= link_to 'Usuń umowę', agreement, method: :delete, class: "btn btn-danger", data: { confirm: 'Czy na pewno usunąć tą umowę?' } %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
