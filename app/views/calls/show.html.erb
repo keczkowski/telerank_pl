@@ -1,0 +1,103 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Rozmowa #<%= @call.id %>: <%= @screenplay.name %></h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= clients_path %>">Baza klientów</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= client_path(@client) %>"><%= @client.imie %> <%= @client.nazwisko %></a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Rozmowa #<%= @call.id %>: <%= @screenplay.name %></strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Rozmowa</h3>
+        <div class="ibox-tools">
+        </div>
+      </div>
+      <div class="ibox-content">
+        <p>
+          <strong><%= @screenplay.name %></strong>
+        </p>
+        <p>
+          <%= @screenplay.body %>
+        </p>
+        <hr>
+        <% @screenplay.questions.order(:sequence).each do |question| %>
+          <p>
+            <strong><%= question.name %></strong><br />
+            <%= question.body %><br />
+            FORMULARZ | ZAPISZ/ZMIEŃ
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Klient</h3>
+        <div class="ibox-tools">
+        </div>
+      </div>
+      <div class="ibox-content">
+        <p>
+          <strong>Imie:</strong>
+          <%= @client.imie %>
+        </p>
+
+        <p>
+          <strong>Nazwisko:</strong>
+          <%= @client.nazwisko %>
+        </p>
+
+        <p>
+          <strong>Numer telefonu:</strong>
+          <%= @client.numer_telefonu %>
+        </p>
+
+        <p>
+          <strong>Email:</strong>
+          <%= @client.email %>
+        </p>
+
+        <p>
+          <strong>Miasto:</strong>
+          <%= @client.miasto %>
+        </p>
+
+        <p>
+          <strong>Kod:</strong>
+          <%= @client.kod %>
+        </p>
+
+        <p>
+          <strong>Adres:</strong>
+          <%= @client.adres %>
+        </p>
+      </div>
+    </div>
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Umowy</h3>
+        <div class="ibox-tools">
+          Narzędzia
+        </div>
+      </div>
+      <div class="ibox-content">
+        Umowy
+      </div>
+    </div>
+  </div>
+</div>

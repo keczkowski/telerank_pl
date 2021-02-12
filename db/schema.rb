@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_132432) do
+ActiveRecord::Schema.define(version: 2021_02_12_123553) do
+
+  create_table "calls", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "client_id"
+    t.integer "screenplay_id"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string "imie"
