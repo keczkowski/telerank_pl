@@ -5,6 +5,7 @@ class Agreement < ApplicationRecord
   belongs_to :user
   belongs_to :partner
   belongs_to :call
+  has_many :agreements, :dependent => :restrict_with_error
 
   validates_presence_of :name
   validates_presence_of :body

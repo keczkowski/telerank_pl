@@ -20,6 +20,8 @@
 //= require slimscroll/jquery.slimscroll.min.js
 //= require metisMenu/jquery.metisMenu.js
 //= require inspinia.js
+//= require select2
+//= require tinymce
 
 $(document).ready(function() {
   $('.select2').select2({

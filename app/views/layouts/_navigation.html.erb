@@ -52,8 +52,8 @@
         <i class="fa fa-tasks"></i> <span class="nav-label">Przypomnienia</span>
         <% end %>
       </li>
-      <li class="">
-        <%= link_to "/home/minor" do %>
+      <li class="<%= 'active' if controller_name == "events" %>">
+        <%= link_to events_path do %>
         <i class="fa fa-calendar"></i> <span class="nav-label">Zdarzenia</span>
         <% end %>
       </li>

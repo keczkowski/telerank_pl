@@ -1,15 +1,15 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2>Edytuj partnera</h2>
+    <h2>Edytuj wydarzenie</h2>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="<%= root_path %>">Strona Główna</a>
       </li>
       <li class="breadcrumb-item">
-        <a href="<%= partners_path %>">Baza partnerów</a>
+        <a href="<%= events_path %>">Baza wydarzeń</a>
       </li>
       <li class="breadcrumb-item">
-        <a href="<%= partner_path(@partner) %>">Partner</a>
+        <a href="<%= event_path(@event) %>">Wydarzenie</a>
       </li>
       <li class="breadcrumb-item active">
         <strong>Edytuj</strong>
@@ -22,9 +22,9 @@
 
 <div class="ibox">
   <div class="ibox-title">
-    <h3>Edytuj partnera</h3>
+    <h3>Edytuj wydarzenie</h3>
     <div class="ibox-tools">
-      <%= link_to partners_path, class: "btn btn-sm btn-primary" do %>
+      <%= link_to events_path, class: "btn btn-sm btn-primary" do %>
         Anuluj
       <% end %>
     </div>

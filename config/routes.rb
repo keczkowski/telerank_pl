@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :agreements
   resources :reminders
   resources :answers
@@ -9,8 +10,8 @@ Rails.application.routes.draw do
   resources :clients do
     get 'call/:call_id' => "clients#call", as: "call"
   end
-  resources :users
   devise_for :users
+  resources :users
   get "home/index"
   get "home/minor"
   get 'questions/up/:id' => 'questions#up', as: 'up'

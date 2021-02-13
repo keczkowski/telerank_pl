@@ -1,0 +1,63 @@
+
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Wydarzenie</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="<%= events_path %>">Baza wydarzeń</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Wydarzenie</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<%= flash_messages %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Informacje</h3>
+        <div class="ibox-tools">
+          <%= link_to 'Edytuj', edit_event_path(@event), class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Cofnij', events_path, class: "btn btn-sm btn-primary" %>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <p>
+          <strong>Name:</strong><br />
+          <%= @event.name %>
+        </p>
+        <p>
+          <strong>Body:</strong><br />
+          <%= @event.body %>
+        </p>
+        <p>
+          <strong>User:</strong><br />
+          <%= link_to @event.user.name, @event.user %>
+        </p>
+        <p>
+          <strong>Client:</strong><br />
+          <%= link_to @event.client.name, @event.client %>
+        </p>
+        <p>
+          <strong>Call:</strong><br />
+          <%= @event.call.present? ? link_to(@event.call.name, @event.call) : "-" %>
+        </p>
+        <p>
+          <strong>Agreement:</strong><br />
+          <%= @event.agreement.present? ? link_to(@event.agreement.name, @event.agreement) : "-" %>
+        </p>
+        <p>
+          <strong>Reminder:</strong><br />
+          <%= @event.reminder.present? ? link_to(@event.reminder.name, @event.reminder) : "-" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
