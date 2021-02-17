@@ -10,4 +10,16 @@ class Call < ApplicationRecord
   def name
     "#{screenplay.name} | #{created_at} | #{user.email}"
   end
+
+  after_create :create_event1
+  after_update :create_event2
+
+  def create_event1
+    Event.create(name: 'Dodano nową rozmowę', body: self.inspect, client_id: self.client_id, user_id: self.user_id, call_id: self.id)
+  end
+
+  def create_event2
+    Event.create(name: 'Zmieniono dane rozmowy', body: self.inspect, client_id: self.client_id, user_id: self.user_id, call_id: self.id)
+  end
+
 end

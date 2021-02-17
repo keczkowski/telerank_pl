@@ -1,4 +1,4 @@
-
+# User.create()
 
 Client.destroy_all
 10.times do
@@ -10,5 +10,6 @@ Client.destroy_all
     adres: Faker::Address.street_address,
     kod: Faker::Address.zip_code,
     miasto: Faker::Address.city
+    user_id: User.first.id
   )
 end

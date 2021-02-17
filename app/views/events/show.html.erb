@@ -30,31 +30,31 @@
       </div>
       <div class="ibox-content">
         <p>
-          <strong>Name:</strong><br />
+          <strong>Nazwa wydarzenia:</strong><br />
           <%= @event.name %>
         </p>
         <p>
-          <strong>Body:</strong><br />
+          <strong>Opis wydarzenia:</strong><br />
           <%= @event.body %>
         </p>
         <p>
-          <strong>User:</strong><br />
+          <strong>Użytkownik:</strong><br />
           <%= link_to @event.user.name, @event.user %>
         </p>
         <p>
-          <strong>Client:</strong><br />
+          <strong>Kleint:</strong><br />
           <%= link_to @event.client.name, @event.client %>
         </p>
         <p>
-          <strong>Call:</strong><br />
+          <strong>Rozmowa:</strong><br />
           <%= @event.call.present? ? link_to(@event.call.name, @event.call) : "-" %>
         </p>
         <p>
-          <strong>Agreement:</strong><br />
+          <strong>Umowa:</strong><br />
           <%= @event.agreement.present? ? link_to(@event.agreement.name, @event.agreement) : "-" %>
         </p>
         <p>
-          <strong>Reminder:</strong><br />
+          <strong>Przypomnienie:</strong><br />
           <%= @event.reminder.present? ? link_to(@event.reminder.name, @event.reminder) : "-" %>
         </p>
       </div>

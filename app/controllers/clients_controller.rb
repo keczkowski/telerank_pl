@@ -36,6 +36,7 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
+    @client.user_id = current_user.id
 
     respond_to do |format|
       if @client.save
@@ -51,6 +52,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
+    @client.user_id = current_user.id
     respond_to do |format|
       if @client.update(client_params)
         format.html { redirect_to @client, notice: 'Klient zostal zaktualizowany.' }
@@ -80,6 +82,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:imie, :nazwisko, :numer_telefonu, :email, :miasto, :kod, :adres)
+      params.require(:client).permit(:imie, :nazwisko, :numer_telefonu, :email, :miasto, :kod, :adres, :user_id)
     end
 end

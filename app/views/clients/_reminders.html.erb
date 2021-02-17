@@ -35,7 +35,8 @@
         <div class="modal-body">
           <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
           <%= f.input :client_id, as: :hidden, input_html: { value: @client.id } %>
-          <%= f.input :name, label: "Treść przypomnienia", as: :text %>
+          <%= f.input :name, label: "Nazwa przypomnienia", as: :text %>
+          <%= f.input :body, label: "Treść przypomnienia", as: :text %>
           <%= f.input :remind_at, label: "Data przypomnienia" %>
           <%= f.input :done, label: "Wykonane", as: :boolean %>
         </div>

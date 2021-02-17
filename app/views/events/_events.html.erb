@@ -2,9 +2,10 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Nazwa wydarzenia</th>
+      <th>Nazwa zdarzenia</th>
       <th>Użytkownik</th>
       <th>Klient</th>
+      <th>Data</th>
       <th width="200"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
       <td><%= link_to event.name, event %></td>
       <td><%= link_to event.user.name, event.user %></td>
       <td><%= link_to event.client.name, event.client %></td>
+      <td><%= event.created_at.strftime("%d/%m/%Y %H:%M") %></td>
       <td>
         <%= link_to 'Pokaż', event, class: "btn btn-sm btn-primary" %>
         <%= link_to 'Edytuj', edit_event_path(event), class: "btn btn-sm btn-warning" %>

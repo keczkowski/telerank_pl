@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :reminders, :dependent => :restrict_with_error
   has_many :calls, :dependent => :restrict_with_error
   has_many :events, :dependent => :restrict_with_error
+  has_many :clients, :dependent => :restrict_with_error
 
   def name
     email

@@ -1,19 +1,19 @@
 
 <%= simple_form_for(@event) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= f.error_notification %>
+<%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.association :user, label: "Użytkownik", input_html: { class: "select2" } %>
-    <%= f.association :client, label: "Klient", input_html: { class: "select2" } %>
-    <%= f.association :call, label: "Rozmowa", input_html: { class: "select2" } %>
-    <%= f.association :agreement, label: "Umowa", input_html: { class: "select2" } %>
-    <%= f.association :reminder, label: "Przypomnienie", input_html: { class: "select2" } %>
-    <%= f.input :name, label: "Nazwa wydarzenia" %>
-    <%= f.input :body, label: "Opis wydarzenia" %>
-  </div>
+<div class="form-inputs">
+  <%= f.input :name, label: "Nazwa zdarzenia" %>
+  <%= f.input :body, label: "Opis zdarzenia" %>
+  <%= f.association :user, label: "Użytkownik", input_html: { class: "select2" } %>
+  <%= f.association :client, label: "Klient", input_html: { class: "select2" } %>
+  <%= f.association :call, label: "Rozmowa", input_html: { class: "select2" } %>
+  <%= f.association :agreement, label: "Umowa", input_html: { class: "select2" } %>
+  <%= f.association :reminder, label: "Przypomnienie", input_html: { class: "select2" } %>
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
-  </div>
+<div class="form-actions">
+  <%= f.button :submit, "Zapisz", class: "btn btn-primary" %>
+</div>
 <% end %>
