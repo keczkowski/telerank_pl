@@ -1,6 +1,7 @@
 class RemindersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_reminder, only: [:show, :edit, :update, :destroy]
+  before_action :has_access_to_reminders
 
   # GET /reminders
   # GET /reminders.json

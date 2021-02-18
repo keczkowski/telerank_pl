@@ -1,6 +1,7 @@
 class ScreenplaysController < ApplicationController
   before_action :authenticate_user!
   before_action :set_screenplay, only: [:show, :edit, :update, :destroy]
+  before_action :has_access_to_screenplays
 
   # GET /screenplays
   # GET /screenplays.json

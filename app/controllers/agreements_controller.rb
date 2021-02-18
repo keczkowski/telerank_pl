@@ -1,6 +1,7 @@
 class AgreementsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_agreement, only: [:show, :edit, :update, :destroy]
+  before_action :has_access_to_agreements
 
   # GET /agreements
   # GET /agreements.json
