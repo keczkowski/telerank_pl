@@ -15,7 +15,7 @@ class Call < ApplicationRecord
   after_update :create_event2
 
   def create_event1
-    Event.create(name: 'Dodano nową rozmowę', body: self.inspect, client_id: self.client_id, user_id: self.user_id, call_id: self.id)
+    Event.create(name: 'Dodano nową rozmowę według scenariusza: #{self.call.screenplay.name}', body: self.inspect, client_id: self.client_id, user_id: self.user_id, call_id: self.id)
   end
 
   def create_event2

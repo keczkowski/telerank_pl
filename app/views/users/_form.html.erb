@@ -1,0 +1,35 @@
+<%= simple_form_for @user, multipart: true do |f| %>
+  <h3>Dane do zalogowania się</h3>
+  <%= f.input :email,
+            required: true,
+            autofocus: true,
+            input_html: { autocomplete: "email" }%>
+  <% if params["action"] == "create" or params["action"] == "new" %>
+    <%= f.input :password,
+                label: "Hasło",
+                required: true,
+                hint: ("#{@minimum_password_length} znaków miminalnie" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                label: "Powtórz hasło",
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+  <% end %>
+  <hr>
+  <h3>Dane dodatkowe</h3>
+  <%= f.input :name, label: "Nazwisko" %>
+  <%= f.input :position, label: "Stanowisko" %>
+  <hr>
+  <h3>Dostępy do modułów systemu</h3>
+  <%= f.input :manage_users, label: "Dostęp do użytkowników", as: :boolean %>
+  <%= f.input :manage_agreements, label: "Dostęp do umów", as: :boolean %>
+  <%= f.input :manage_calls, label: "Dostęp do rozmów", as: :boolean %>
+  <%= f.input :manage_clients, label: "Dostęp do klienów", as: :boolean %>
+  <%= f.input :manage_events, label: "Dostęp do zdarzeń", as: :boolean %>
+  <%= f.input :manage_partners, label: "Dostęp do partnerów", as: :boolean %>
+  <%= f.input :manage_reminders, label: "Dostęp do przypomnień", as: :boolean %>
+  <%= f.input :manage_screenplays, label: "Dostęp do scenariuszy", as: :boolean %>
+  <hr>
+  <%= f.button :submit, "Zapisz", class: "btn btn-sm btn-primary" %>
+  <%= link_to "Anuluj", users_path, class: "btn btn-sm btn-primary" %>
+<% end %>
