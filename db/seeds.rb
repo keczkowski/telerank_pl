@@ -1,9 +1,16 @@
-User.destroy_all
-Partner.destroy_all
-Screenplay.destroy_all
+Event.destroy_all
+Answer.destroy_all
+Agreement.destroy_all
+Reminder.destroy_all
+
 Question.destroy_all
-Client.destroy_all
+
 Call.destroy_all
+Screenplay.destroy_all
+
+Partner.destroy_all
+Client.destroy_all
+User.destroy_all
 
 user = User.create(
   name: 'Michał Trziszka',
@@ -20,6 +27,24 @@ user = User.create(
   manage_screenplays: true,
   manage_users: true
 )
+
+10.times do
+  User.create(
+    name: Faker::Name.name ,
+    position: Faker::Job.title,
+    email: Faker::Internet.email,
+    password: '123qwe!@#QWE',
+    password_confirmation: '123qwe!@#QWE',
+    manage_agreements: false,
+    manage_calls: false,
+    manage_clients: false,
+    manage_events: false,
+    manage_partners: false,
+    manage_reminders: false,
+    manage_screenplays: false,
+    manage_users: false
+  )
+end
 
 5.times do
   partner = Partner.create(
@@ -62,4 +87,22 @@ end
       status: 'Rozmowa zakonczona sukcesem'
     )
   end
+  2.times do
+    reminder = Reminder.create(
+      name: Faker::Lorem.sentence,
+      remind_at: Time.now + 1.day,
+      user_id: user.id,
+      client_id: client.id,
+      body: Faker::Lorem.paragraph(sentence_count: 5)
+    )
+  end
+  call_x = client.calls.sample
+  agreement = Agreement.create(
+    user_id: user.id,
+    name: Faker::Number.leading_zero_number(digits: 10),
+    body: Faker::Lorem.sentence,
+    client_id: client.id,
+    call_id: call_x.id,
+    partner_id: call_x.screenplay.partner.id
+  )
 end
