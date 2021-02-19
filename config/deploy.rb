@@ -16,10 +16,7 @@ set :keep_releases, 5
 # Default branch is :master
 ask :branch, "main"
 
-set :default_env, {
-  "RAILS_ENV" => "production",
-  "RAILS_MASTER_KEY" => ENV["RAILS_MASTER_KEY"]
-}
+append :linked_files, "config/master.key"
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
