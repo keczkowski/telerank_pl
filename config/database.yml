@@ -12,8 +12,8 @@ development:
 production:
   adapter: mysql2
   encoding: utf8
-  host: 51.68.137.244
+  host: 54.37.138.78
   pool: 5
   database: telerank_pl
-  username: user
-  password: Stabilox123
+  username: deploy
+  password: 123qwe!@#QWE
