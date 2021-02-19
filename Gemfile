@@ -6,7 +6,7 @@ ruby '2.6.2'
 gem 'rails', '~> 6.0.1'
 gem 'bootstrap', '~> 4.3.1'
 gem "font-awesome-rails"
-gem 'sqlite3', '~> 1.4'
+gem 'mysql2'
 gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
