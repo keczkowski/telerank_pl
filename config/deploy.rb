@@ -3,7 +3,6 @@ lock "~> 3.15.0"
 
 set :application, "myapp"
 set :repo_url, "git@github.com:keczkowski/telerank_pl.git"
-set :repo_url, 'https://my_github_username:my_github_password@github.com/BoTreeConsultingTeam/magnificent'
 
 
 # Deploy to the user's home directory
