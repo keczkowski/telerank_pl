@@ -56,8 +56,8 @@ end
       name: Faker::App.name,
       body: Faker::Lorem.paragraph(sentence_count: 30)
     )
+    n = 0
     5.times do
-      n = 1
       question = Question.create(
         screenplay_id: screenplay.id,
         name: Faker::Lorem.sentence,
