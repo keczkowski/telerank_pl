@@ -1,13 +1,12 @@
 class RemindersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_reminder, only: [:show, :edit, :update, :destroy]
-  before_action :has_access_to_reminders
 
   # GET /reminders
   # GET /reminders.json
   def index
     @q = Reminder.ransack(params[:q])
-    @reminders = @q.result(distinct: true).page params[:page]
+    @reminders = @q.result(distinct: true).accessible_by(current_ability).page params[:page]
   end
 
   # GET /reminders/1
@@ -67,7 +66,7 @@ class RemindersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reminder
-      @reminder = Reminder.find(params[:id])
+      @reminder = Reminder.accessible_by(current_ability)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

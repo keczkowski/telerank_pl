@@ -25,7 +25,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th><%= sort_link(@q, :id, "#id") %></th>
+          <th><%= sort_link(@q, :id, "ID") %></th>
           <th><%= sort_link(@q, :email, "Email") %></th>
           <th><%= sort_link(@q, :name, "Nazwisko") %></th>
           <th>Dostępy</th>
@@ -36,14 +36,49 @@
       <tbody>
         <% @users.each do |user| %>
         <tr>
-          <td><%= user.id %></td>
+          <td><%= link_to "##{user.id}", user %></td>
           <td><%= link_to user.email, user %></td>
           <td><%= link_to user.name, user %></td>
           <td>
             <% if user.manage_users %>
-            <span class="badge badge-primary">Użytkownicy</span>
+              <span class="badge badge-primary">Użytkownicy</span>
             <% else %>
-            <span class="badge badge-danger">Użytkownicy</span>
+              <span class="badge badge-danger">Użytkownicy</span>
+            <% end %>
+            <% if user.manage_agreements %>
+              <span class="badge badge-primary">Umowy</span>
+            <% else %>
+              <span class="badge badge-danger">Umowy</span>
+            <% end %>
+            <% if user.manage_calls %>
+              <span class="badge badge-primary">Rozmowy</span>
+            <% else %>
+              <span class="badge badge-danger">Rozmowy</span>
+            <% end %>
+            <% if user.manage_clients %>
+              <span class="badge badge-primary">Klienci</span>
+            <% else %>
+              <span class="badge badge-danger">Klienci</span>
+            <% end %>
+            <% if user.manage_events %>
+              <span class="badge badge-primary">Zdarzenia</span>
+            <% else %>
+              <span class="badge badge-danger">Zdarzenia</span>
+            <% end %>
+            <% if user.manage_partners %>
+              <span class="badge badge-primary">Partnerzy</span>
+            <% else %>
+              <span class="badge badge-danger">Partnerzy</span>
+            <% end %>
+            <% if user.manage_reminders %>
+              <span class="badge badge-primary">Przypomnienia</span>
+            <% else %>
+              <span class="badge badge-danger">Przypomnienia</span>
+            <% end %>
+            <% if user.manage_screenplays %>
+              <span class="badge badge-primary">Scenariusze</span>
+            <% else %>
+              <span class="badge badge-danger">Scenariusze</span>
             <% end %>
           </td>
           <td><%= link_to user.updated_at, user %></td>

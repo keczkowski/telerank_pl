@@ -64,7 +64,7 @@
           <% end %>
         </li>
       <% end %>
-      <% if current_user.manage_reminders %>
+      <% if can? :read, Reminder %>
         <li class="<%= 'active' if controller_name == "reminders" %>">
           <%= link_to reminders_path do %>
           <i class="fa fa-tasks"></i> <span class="nav-label">Przypomnienia</span>
