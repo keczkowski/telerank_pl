@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_02_18_054616) do
 
-  create_table "agreements", force: :cascade do |t|
+  create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "body"
     t.integer "user_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "answers", force: :cascade do |t|
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "question_id"
     t.integer "call_id"
     t.string "name"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "calls", force: :cascade do |t|
+  create_table "calls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "client_id"
     t.integer "screenplay_id"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "clients", force: :cascade do |t|
+  create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "imie"
     t.string "nazwisko"
     t.string "numer_telefonu"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.integer "user_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "client_id"
     t.integer "call_id"
@@ -65,13 +65,13 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "partners", force: :cascade do |t|
+  create_table "partners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "questions", force: :cascade do |t|
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "screenplay_id"
     t.string "name"
     t.text "body"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "reminders", force: :cascade do |t|
+  create_table "reminders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "remind_at"
     t.string "name"
     t.integer "user_id"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.boolean "done"
   end
 
-  create_table "screenplays", force: :cascade do |t|
+  create_table "screenplays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "body"
     t.integer "partner_id"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_054616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
