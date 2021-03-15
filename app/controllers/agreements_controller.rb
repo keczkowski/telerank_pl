@@ -31,7 +31,7 @@ class AgreementsController < ApplicationController
 
     respond_to do |format|
       if @agreement.save
-        format.html { redirect_back(fallback_location: root_path) }
+        format.html { redirect_back(fallback_location: root_path, notice: "Dodano umowę do bazy danych.") }
         format.json { render :show, status: :created, location: @agreement }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class AgreementsController < ApplicationController
   def update
     respond_to do |format|
       if @agreement.update(agreement_params)
-        format.html { redirect_back(fallback_location: root_path) }
+        format.html { redirect_back(fallback_location: root_path, notice: "Zmieniono umowę w bazie danych.") }
         format.json { render :show, status: :ok, location: @agreement }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class AgreementsController < ApplicationController
   def destroy
     @agreement.destroy
     respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path) }
+      format.html { redirect_back(fallback_location: root_path, notice: "Usunięto umowę z bazy danych.") }
       format.json { head :no_content }
     end
   end
