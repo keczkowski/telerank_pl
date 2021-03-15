@@ -74,6 +74,6 @@ class ScreenplaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def screenplay_params
-      params.require(:screenplay).permit(:name, :body, :partner_id)
+      params.require(:screenplay).permit(:name, :body, :partner_id, :prelude, :ending)
     end
 end

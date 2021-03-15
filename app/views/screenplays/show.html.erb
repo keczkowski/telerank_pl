@@ -31,17 +31,31 @@
   </div>
   <div class="ibox-content">
     <p>
-      <strong>Partner:</strong>
-      <%= link_to @screenplay.partner.name, @screenplay.name %>
+      <strong>Partner:</strong><br />
+      <%= link_to @screenplay.partner.name, @screenplay.partner %>
     </p>
     <p>
-      <strong>Nazwa:</strong>
+      <strong>Nazwa:</strong><br />
       <%= @screenplay.name %>
     </p>
     <p>
-      <strong>Opis:</strong>
-      <%= @screenplay.body %>
+      <strong>Opis:</strong><br />
+      <%= simple_format @screenplay.body %>
     </p>
+  </div>
+</div>
+
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Wstęp</h3>
+    <div class="ibox-tools">
+      <%= link_to edit_screenplay_path(@screenplay), class: "btn btn-sm btn-primary" do %>
+      Edytuj
+      <% end %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= simple_format @screenplay.prelude %>
   </div>
 </div>
 
@@ -78,6 +92,20 @@
       </tr>
       <% end %>
     </table>
+  </div>
+</div>
+
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Zakończenie</h3>
+    <div class="ibox-tools">
+      <%= link_to edit_screenplay_path(@screenplay), class: "btn btn-sm btn-primary" do %>
+      Edytuj
+      <% end %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <%= simple_format @screenplay.ending %>
   </div>
 </div>
 

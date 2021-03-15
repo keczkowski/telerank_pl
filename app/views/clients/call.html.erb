@@ -23,123 +23,166 @@
 <div class="row">
   <div class="col-lg-8">
     <div class="ibox">
-      <div class="ibox-title">
-        <h3>Rozmowa</h3>
-        <div class="ibox-tools">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h3>Scenariusz</h3>
+          <div class="ibox-tools">
+          </div>
+        </div>
+        <div class="ibox-content">
+          <p>
+            <strong><%= @screenplay.name %></strong>
+          </p>
+          <p>
+            <%= simple_format @screenplay.body %>
+          </p>
         </div>
       </div>
-      <div class="ibox-content">
-        <p>
-          <strong><%= @screenplay.name %></strong>
-        </p>
-        <p>
-          <%= @screenplay.body %>
-        </p>
-        <hr>
-        <% @screenplay.questions.order(:sequence).each do |question| %>
-        <p>
-          <% @answer = Answer.where(question_id: question.id, call_id: @call.id).first %>
-          <% if @answer.present? %>
-          <%= simple_form_for(@answer) do |f| %>
-          <%= f.input :call_id, as: :hidden, input_html: { value: @call.id } %>
-          <%= f.input :question_id, as: :hidden, input_html: { value: question.id } %>
-          <%= f.input :name, label: question.body, input_html: { placeholder: question.name } %>
-          <%= f.submit "Zmień", class: "btn btn-sm btn-warning" %>
-          <%= link_to 'Usuń', @answer, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Czy na pewno usunąć tą odpowiedź?' } %>
-          <% end %>
-          <% else %>
-          <%= simple_form_for(Answer.new) do |f| %>
-          <%= f.input :call_id, as: :hidden, input_html: { value: @call.id } %>
-          <%= f.input :question_id, as: :hidden, input_html: { value: question.id } %>
-          <%= f.input :name, label: question.body, input_html: { placeholder: question.name } %>
-          <%= f.submit "Zapisz", class: "btn btn-sm btn-primary" %>
-          <% end %>
-          <% end %>
-        </p>
-        <hr>
-        <% end %>
-        <% @questions_count = @screenplay.questions.count %>
-        <% @answers_count = @call.answers.count %>
-        <% @progress = @questions_count > 0 ? @answers_count / @questions_count.to_f * 100 : 0 %>
-        <div class="progress">
-          <div class="progress-bar" style="width: <%= @progress %>%" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100"></div>
+      <div class="ibox">
+        <div class="ibox-title">
+          <h3>Rozmowa</h3>
+          <div class="ibox-tools">
+          </div>
         </div>
-        <p>
-          Postęp: <%= @progress.round(2) %>% (<%= @answers_count %> / <%= @questions_count %>)
-        </p>
-        <hr>
-        <%= simple_form_for(@call) do |f| %>
-        <%= f.input :status, label: "Zmień status po zakończeniu czynności", hint: "Nie zapomnij uzupełnić Statusu", collection: ["Uzupełniono wszystkie dane (Sukces)", "Brak zainteresowania ofertą (Porażka)", "Prośba o kontakt później", "Klient nie odebrał"], input_html: { class: "select2" } %>
-        <%= f.submit "Zmień status", class: "btn btn-mini btn-primary" %>
-        <% end %>
+        <div class="ibox-content">
+          <%= simple_format @screenplay.prelude %>
+          <hr>
+          <% flag = 0 %>
+          <% @screenplay.questions.order(:sequence).each do |question| %>
+          <p>
+            <% @answer = Answer.where(question_id: question.id, call_id: @call.id).first %>
+            <% if @answer.present? %>
+            <%= simple_form_for(@answer) do |f| %>
+            <%= f.input :call_id, as: :hidden, input_html: { value: @call.id } %>
+            <%= f.input :question_id, as: :hidden, input_html: { value: question.id } %>
+            <%= f.input :name, label: question.body, input_html: { placeholder: question.name } %>
+            <%= f.submit "Zmień", class: "btn btn-sm btn-warning" %>
+            <%= link_to 'Usuń', @answer, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Czy na pewno usunąć tą odpowiedź?' } %>
+            <% end %>
+            <% else %>
+            <%= simple_form_for(Answer.new) do |f| %>
+            <%= f.input :call_id, as: :hidden, input_html: { value: @call.id } %>
+            <%= f.input :question_id, as: :hidden, input_html: { value: question.id } %>
+            <% if flag == 0 %>
+            <%= f.input :name, label: question.body, input_html: { placeholder: question.name } %>
+            <%= f.submit "Zapisz", class: "btn btn-sm btn-primary" %>
+            <% else %>
+            <%= f.input :name, label: question.body, input_html: { placeholder: question.name, disabled: :true} %>
+            <%= link_to "Zapisz", "#", class: "btn btn-sm btn-primary disabled" %>
+            <% end %>
+            <% flag = 1 %>
+            <% end %>
+            <% end %>
+          </p>
+          <hr>
+          <% end %>
+          <%= simple_format @screenplay.ending %>
+          <hr>
+          <% @questions_count = @screenplay.questions.count %>
+          <% @answers_count = @call.answers.count %>
+          <% @progress = @questions_count > 0 ? @answers_count / @questions_count.to_f * 100 : 0 %>
+          <div class="progress">
+            <div class="progress-bar" style="width: <%= @progress %>%" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p>
+            Postęp: <%= @progress.round(2) %>% (<%= @answers_count %> / <%= @questions_count %>)
+          </p>
+          <hr>
+          <%= simple_form_for(@call) do |f| %>
+          <%= f.input :status, label: "Zmień status po zakończeniu czynności", hint: "Nie zapomnij uzupełnić Statusu", collection: ["Uzupełniono wszystkie dane (Sukces)", "Brak zainteresowania ofertą (Porażka)", "Prośba o kontakt później", "Klient nie odebrał"], input_html: { class: "select2" } %>
+          <%= f.submit "Zmień status", class: "btn btn-mini btn-primary" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-lg-4">
-    <div class="ibox">
-      <div class="ibox-title">
-        <h3>Klient</h3>
-        <div class="ibox-tools">
-        </div>
+    <%= render 'info' %>
+    <%= render 'reminders' %>
+    <%= render 'agreements' %>
+  </div>
+</div>
+
+<!-- Modal Przypomnienie -->
+<div class="modal fade" id="newReminderModalCenter" tabindex="-1" role="dialog" aria-labelledby="newReminderModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dodaj przypomnienie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="ibox-content">
-        <p>
-          <strong>Imie:</strong>
-          <%= @client.imie %>
-        </p>
-
-        <p>
-          <strong>Nazwisko:</strong>
-          <%= @client.nazwisko %>
-        </p>
-
-        <p>
-          <strong>Numer telefonu:</strong>
-          <%= @client.numer_telefonu %>
-        </p>
-
-        <p>
-          <strong>Email:</strong>
-          <%= @client.email %>
-        </p>
-
-        <p>
-          <strong>Miasto:</strong>
-          <%= @client.miasto %>
-        </p>
-
-        <p>
-          <strong>Kod:</strong>
-          <%= @client.kod %>
-        </p>
-
-        <p>
-          <strong>Adres:</strong>
-          <%= @client.adres %>
-        </p>
+      <%= simple_form_for(@reminder) do |f| %>
+      <div class="modal-body">
+        <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :client_id, as: :hidden, input_html: { value: @client.id } %>
+        <%= f.input :name, label: "Nazwa przypomnienia" %>
+        <%= f.input :body, label: "Treść przypomnienia" %>
+        <%= f.input :remind_at, label: "Data przypomnienia" %>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <%= f.button :submit, "Dodaj", class: "btn btn-primary" %>
+      </div>
+      <% end %>
     </div>
-    <div class="ibox">
-      <div class="ibox-title">
-        <h3>Przypomnienia</h3>
-        <div class="ibox-tools">
-          Dodaj przypomnienie
-        </div>
+  </div>
+</div>
+
+<!-- Modal Umowa -->
+<div class="modal fade" id="newAgreementModalCenter" tabindex="-1" role="dialog" aria-labelledby="newAgreementModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dodaj umowę</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="ibox-content">
-        Aktywne przypomnienia | Oznacz jako wykonane
+      <%= simple_form_for(@agreement) do |f| %>
+      <div class="modal-body">
+        <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :client_id, as: :hidden, input_html: { value: @client.id } %>
+        <%= f.association :partner %>
+        <%= f.association :call, label: "Rozmowa" %>
+        <%= f.input :name, label: "Numer umowy" %>
+        <%= f.input :body, label: "Uwagi" %>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <%= f.button :submit, "Dodaj", class: "btn btn-primary" %>
+      </div>
+      <% end %>
     </div>
-    <div class="ibox">
-      <div class="ibox-title">
-        <h3>Umowy</h3>
-        <div class="ibox-tools">
-          Narzędzia
-        </div>
+  </div>
+</div>
+
+<!-- Modal Info -->
+<div class="modal fade" id="editInfoModalCenter" tabindex="-1" role="dialog" aria-labelledby="editInfoModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edytuj info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="ibox-content">
-        Umowy
+      <%= simple_form_for(@client) do |f| %>
+      <div class="modal-body">
+        <%= f.input :imie %>
+        <%= f.input :nazwisko %>
+        <%= f.input :numer_telefonu %>
+        <%= f.input :email %>
+        <%= f.input :miasto %>
+        <%= f.input :kod %>
+        <%= f.input :adres %>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+        <%= f.button :submit, "Dodaj", class: "btn btn-primary" %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

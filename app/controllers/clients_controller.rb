@@ -22,6 +22,8 @@ class ClientsController < ApplicationController
     @call = Call.find(params[:call_id])
     @client = @call.client
     @screenplay = @call.screenplay
+    @reminder = Reminder.new
+    @agreement = Agreement.new
   end
 
   # GET /clients/new

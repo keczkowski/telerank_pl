@@ -1,8 +1,11 @@
-<div class="footer">
-  <div class="pull-right">
-    Dzisiaj jest <strong><%= l(Time.now + 1.hour, format: '%A, %d %B %Y, godzina %H:%M') %></strong>.
+<div class="navbar fixed-bottom">
+  <div class="footer">
+    <div class="pull-right">
+      Dzisiaj jest <strong><%= l(Time.now + 1.hour, format: '%A, %d %B %Y, godzina %H:%M') %></strong>.
+    </div>
+    <div>
+      <strong>Copyright</strong> Telerank.pl &copy; 2020-<%= Date.today.year %>
+    </div>
   </div>
-  <div>
-    <strong>Copyright</strong> Telerank.pl &copy; 2020-<%= Date.today.year %>
-  </div>
+
 </div>
