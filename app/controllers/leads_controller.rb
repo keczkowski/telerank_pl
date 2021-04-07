@@ -39,4 +39,7 @@ class LeadsController < ApplicationController
     end
   end
 
+  def financial
+  end
+
 end
