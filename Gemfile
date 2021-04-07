@@ -23,6 +23,7 @@ gem 'tinymce-rails-langs'
 gem 'carrierwave', '~> 2.0'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'cancancan'
+gem "chartkick"
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

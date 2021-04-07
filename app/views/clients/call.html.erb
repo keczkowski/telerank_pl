@@ -90,6 +90,8 @@
           <hr>
           <%= simple_form_for(@call) do |f| %>
           <%= f.input :status, label: "Zmień status po zakończeniu czynności", hint: "Nie zapomnij uzupełnić Statusu", collection: ["Uzupełniono wszystkie dane (Sukces)", "Brak zainteresowania ofertą (Porażka)", "Prośba o kontakt później", "Klient nie odebrał"], input_html: { class: "select2" } %>
+          <%= f.input :city, label: "Miasto", hint: "Nie zapomnij uzupełnić Miasta" %>
+
           <%= f.submit "Zmień status", class: "btn btn-mini btn-primary" %>
           <% end %>
         </div>

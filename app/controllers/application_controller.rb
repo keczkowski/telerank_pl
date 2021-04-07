@@ -48,4 +48,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def has_access_to_leads
+    unless current_user.present? and current_user.manage_leads == true
+      redirect_to root_path
+    end
+  end
+
 end

@@ -1,0 +1,105 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Pozyskiwanie leadów</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>
+          <% if params[:status] and params[:status] == 'sukces' %>
+          Skonwerowane leady
+          <% elsif params[:status] and params[:status] == 'nie' %>
+          Nieskonwertowane leady
+          <% else %>
+          Pozyskane leady
+          <% end %>
+        </strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<%= flash_messages %>
+
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Filtry</h3>
+    <div class="ibox-tools">
+
+    </div>
+  </div>
+  <div class="ibox-content">
+    <div class="row">
+      <div class="col-lg-4">
+        <%= search_form_for @q, url: leads_url(status: params[:status]) do |f| %>
+        <p>
+          <%= f.label :partner_name_cont, "Partner/Marka" %><br />
+          <%= f.search_field :partner_name_cont %>
+        </p>
+        <p>
+          <%= f.label :city_cont, "Miasto" %><br />
+          <%= f.search_field :city_cont %>
+        </p>
+        <p>
+          <%= f.label :product_cont, "Produkt" %><br />
+          <%= f.search_field :product_cont %>
+        </p>
+        <p>
+          <%= f.submit "Filtruj", class: "btn btn-primary" %>
+        </p>
+        <% end %>
+      </div>
+      <div class="col-lg-4">
+        <p>
+          <a href="<%= leads_path(status: nil) %>">Pozyskane leady: <strong><%= @leads_count %></strong></a>
+        </p>
+        <p>
+          <a href="<%= leads_path(status: "sukces") %>">Skonwertowane leady: <strong><%= @converted_leads_count %></strong></a>
+        </p>
+        <p>
+          <a href="<%= leads_path(status: "nie") %>">Nieskonwertowane leady: <strong><%= @not_converted_leads_count %></strong></a>
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <%= pie_chart [["Nieskonwertowane", @not_converted_leads_count], ["Skonwertowane", @converted_leads_count]] %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ibox">
+  <div class="ibox-title">
+    <% if params[:status] and params[:status] == 'sukces' %>
+    <h3>Skonwertowane leady</h3>
+    <% elsif params[:status] and params[:status] == 'nie' %>
+    <h3>Nieskonwertowane leady</h3>
+    <% else %>
+    <h3>Pozyskane leady</h3>
+    <% end %>
+    <div class="ibox-tools">
+      <%= link_to "Eksportuj do xls", "#", class: "btn btn-mini btn-primary" %>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <table class="table table-striped">
+      <tr>
+        <th>#ID</th>
+        <th>Klient</th>
+        <th>Partner/Marka</th>
+        <th>Miasto</th>
+        <th>Produkt</th>
+      </tr>
+      <% @leads.each do |lead| %>
+      <tr>
+        <td><%= lead.id %></td>
+        <td><%= lead.client.name %></td>
+        <td><%= lead.partner.name %></td>
+        <td><%= lead.city %></td>
+        <td><%= lead.product %></td>
+      </tr>
+      <% end %>
+    </table>
+    <%= paginate @leads %>
+  </div>
+</div>

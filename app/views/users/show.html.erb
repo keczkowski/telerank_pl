@@ -96,6 +96,11 @@
           <% else %>
             <span class="badge badge-danger">Scenariusze</span>
           <% end %>
+          <% if @user.manage_leads %>
+            <span class="badge badge-primary">Leady</span>
+          <% else %>
+            <span class="badge badge-danger">Leady</span>
+          <% end %>
         </p>
       </div>
     </div>

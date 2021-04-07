@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :calls
   resources :screenplays
   resources :questions
+  resources :leads
   get 'questions/up/:id' => 'questions#up', as: 'up'
   get 'questions/down/:id' => 'questions#down', as: 'down'
   resources :partners

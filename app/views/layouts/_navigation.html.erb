@@ -10,12 +10,12 @@
           <ul class="dropdown-menu animated fadeInRight m-t-xs">
             <li>
               <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
-                Ustawienia
+              Ustawienia
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
-                Wyloguj
+              Wyloguj
               <% end %>
             </li>
           </ul>
@@ -30,64 +30,76 @@
         <% end %>
       </li>
       <% if current_user.manage_partners %>
-        <li class="<%= 'active' if controller_name == "partners" %>">
-          <%= link_to partners_path do %>
-          <i class="fa fa-handshake-o"></i> <span class="nav-label">Partnerzy</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "partners" %>">
+        <%= link_to partners_path do %>
+        <i class="fa fa-handshake-o"></i> <span class="nav-label">Partnerzy</span>
+        <% end %>
+      </li>
       <% end %>
       <% if current_user.manage_screenplays %>
-        <li class="<%= 'active' if controller_name == "screenplays" %>">
-          <%= link_to screenplays_path do %>
-          <i class="fa fa-pencil"></i> <span class="nav-label">Scenariusze</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "screenplays" %>">
+        <%= link_to screenplays_path do %>
+        <i class="fa fa-pencil"></i> <span class="nav-label">Scenariusze</span>
+        <% end %>
+      </li>
       <% end %>
       <% if current_user.manage_clients %>
-        <li class="<%= 'active' if controller_name == "clients" %>">
-          <%= link_to clients_path do %>
-          <i class="fa fa-address-card"></i> <span class="nav-label">Klienci</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "clients" %>">
+        <%= link_to clients_path do %>
+        <i class="fa fa-address-card"></i> <span class="nav-label">Klienci</span>
+        <% end %>
+      </li>
       <% end %>
       <% if current_user.manage_agreements %>
-        <li class="<%= 'active' if controller_name == "agreements" %>">
-          <%= link_to agreements_path do %>
-          <i class="fa fa-file-text"></i> <span class="nav-label">Umowy</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "agreements" %>">
+        <%= link_to agreements_path do %>
+        <i class="fa fa-file-text"></i> <span class="nav-label">Umowy</span>
+        <% end %>
+      </li>
       <% end %>
       <% if current_user.manage_calls %>
-        <li class="<%= 'active' if controller_name == "calls" %>">
-          <%= link_to calls_path do %>
-          <i class="fa fa-phone"></i> <span class="nav-label">Rozmowy</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "calls" %>">
+        <%= link_to calls_path do %>
+        <i class="fa fa-phone"></i> <span class="nav-label">Rozmowy</span>
+        <% end %>
+      </li>
       <% end %>
       <% if can? :read, Reminder %>
-        <li class="<%= 'active' if controller_name == "reminders" %>">
-          <%= link_to reminders_path do %>
-          <i class="fa fa-tasks"></i> <span class="nav-label">Przypomnienia</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "reminders" %>">
+        <%= link_to reminders_path do %>
+        <i class="fa fa-tasks"></i> <span class="nav-label">Przypomnienia</span>
+        <% end %>
+      </li>
       <% end %>
       <% if current_user.manage_events %>
-        <li class="<%= 'active' if controller_name == "events" %>">
-          <%= link_to events_path do %>
-          <i class="fa fa-calendar"></i> <span class="nav-label">Dziennik zdarzeń</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "events" %>">
+        <%= link_to events_path do %>
+        <i class="fa fa-calendar"></i> <span class="nav-label">Dziennik zdarzeń</span>
+        <% end %>
+      </li>
       <% end %>
       <% if current_user.manage_users %>
-        <li class="<%= 'active' if controller_name == "users" %>">
-          <%= link_to users_path do %>
-          <i class="fa fa-user"></i> <span class="nav-label">Użytkownicy</span>
-          <% end %>
-        </li>
+      <li class="<%= 'active' if controller_name == "users" %>">
+        <%= link_to users_path do %>
+        <i class="fa fa-user"></i> <span class="nav-label">Użytkownicy</span>
+        <% end %>
+      </li>
+      <% end %>
+      <% if current_user.manage_leads %>
+      <li class="<%= 'active' if controller_name == "leads" %>">
+        <%= link_to leads_path do %>
+        <i class="fa fa-money"></i> <span class="nav-label">Pozyskiwanie leadów</span>
+        <% end %>
+      </li>
       <% end %>
       <li class="">
         <%= link_to "#" do %>
-        <i class="fa fa-print"></i> <span class="nav-label">Statystyki</span>
+        <i class="fa fa-print"></i> <span class="nav-label">Raporty sprzedaży</span>
+        <% end %>
+      </li>
+      <li class="">
+        <%= link_to "#" do %>
+        <i class="fa fa-print"></i> <span class="nav-label">Raport finansowy</span>
         <% end %>
       </li>
     </ul>

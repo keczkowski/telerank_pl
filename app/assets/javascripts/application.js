@@ -22,6 +22,9 @@
 //= require inspinia.js
 //= require select2
 //= require tinymce
+//= require Chart.bundle
+//= require chartkick
+require("chartkick/chart.js")
 
 $(document).ready(function() {
   $('.select2').select2({
