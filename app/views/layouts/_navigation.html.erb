@@ -86,22 +86,26 @@
       </li>
       <% end %>
       <% if current_user.manage_leads %>
-      <li class="<%= 'active' if controller_name == "leads" %>">
+      <li class="<%= 'active' if controller_name == "leads" and action_name == 'index' %>">
         <%= link_to leads_path do %>
-        <i class="fa fa-money"></i> <span class="nav-label">Pozyskiwanie leadów</span>
+        <i class="fa fa-print"></i> <span class="nav-label">Pozyskiwanie leadów</span>
         <% end %>
       </li>
       <% end %>
-      <li class="">
-        <%= link_to "#" do %>
-        <i class="fa fa-print"></i> <span class="nav-label">Raporty sprzedaży</span>
+      <% if current_user.manage_leads %>
+      <li class="<%= 'active' if controller_name == "leads" and action_name == 'sales' %>">
+        <%= link_to sales_path do %>
+        <i class="fa fa-print"></i> <span class="nav-label">Skuteczność sprzedaży</span>
         <% end %>
       </li>
-      <li class="">
-        <%= link_to "#" do %>
+      <% end %>
+      <% if current_user.manage_leads %>
+      <li class="<%= 'active' if controller_name == "leads" and action_name == 'financial' %>">
+        <%= link_to financial_path do %>
         <i class="fa fa-print"></i> <span class="nav-label">Raport finansowy</span>
         <% end %>
       </li>
+      <% end %>
     </ul>
   </div>
 </nav>

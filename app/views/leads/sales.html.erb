@@ -1,0 +1,115 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Skuteczność sprzedaży</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="<%= root_path %>">Strona Główna</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>
+          Skuteczność sprzedaży
+        </strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<%= flash_messages %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Filtry</h3>
+        <div class="ibox-tools">
+        </div>
+      </div>
+      <div class="ibox-content">
+        <%= form_tag sales_url, {method: :get, class: "form"} do %>
+        <p>
+          <%= label_tag :user_id, "Użytkownik:" %>
+          <%= select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'email', selected: params[:user_id]), prompt: "", class: "form-control" %>
+        </p>
+        <p>
+          <%= label_tag :period, "Grupowanie:" %>
+          <%= select_tag :period, options_for_select(["Dzien", "Tydzien", "Miesiac", "Kwartal", "Rok"], selected: [params[:period]]), class: "form-control" %>
+        </p>
+        <p>
+          <%= submit_tag "Filtruj", class: "btn btn-primary" %>
+        </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Podsumowanie</h3>
+        <div class="ibox-tools">
+        </div>
+      </div>
+      <div class="ibox-content">
+        <table class="table table-striped">
+          <tr>
+            <td>Leady łącznie</td>
+            <td><%= @leads_count %></td>
+          </tr>
+          <tr>
+            <td>Leady skonwertowane</td>
+            <td><%= @converted_leads_count %></td>
+          </tr>
+          <tr>
+            <td>Leady nieskonwetowane</td>
+            <td><%= @leads_count - @converted_leads_count %></td>
+          </tr>
+        </table>
+        <%= pie_chart [["Nieskonwertowane", @not_converted_leads_count], ["Skonwertowane", @converted_leads_count]] %>
+        Skuteczność <%= @converted_leads_count / @leads_count.to_f * 100 %>%
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Obsłużone leady: <%= @user.present? ? @user.email : "Wszyscy" %>, Grupowanie: <%= params[:period].present? ? params[:period] : "" %></h3>
+    <div class="ibox-tools">
+    </div>
+  </div>
+  <div class="ibox-content">
+    <% if params[:period].present? and params[:period] == 'Rok' %>
+      <%= column_chart @leads.group_by_year(:created_at).count %>
+    <% elsif params[:period].present? and params[:period] == 'Kwartal' %>
+      <%= column_chart @leads.group_by_quarter(:created_at).count %>
+    <% elsif params[:period].present? and params[:period] == 'Miesiac' %>
+      <%= column_chart @leads.group_by_month(:created_at).count %>
+    <% elsif params[:period].present? and params[:period] == 'Tydzien' %>
+      <%= column_chart @leads.group_by_week(:created_at).count %>
+    <% else %>
+      <%= column_chart @leads.group_by_day(:created_at).count %>
+    <% end %>
+  </div>
+</div>
+
+<div class="ibox">
+  <div class="ibox-title">
+    <h3>Skonwertowane leady: <%= @user.present? ? @user.email : "Wszyscy" %>, Grupowanie: <%= params[:period].present? ? params[:period] : "" %></h3>
+    <div class="ibox-tools">
+    </div>
+  </div>
+  <div class="ibox-content">
+    <% if params[:period].present? and params[:period] == 'Rok' %>
+      <%= column_chart @converted_leads.group_by_year(:created_at).count %>
+    <% elsif params[:period].present? and params[:period] == 'Kwartal' %>
+      <%= column_chart @converted_leads.group_by_quarter(:created_at).count %>
+    <% elsif params[:period].present? and params[:period] == 'Miesiac' %>
+      <%= column_chart @converted_leads.group_by_month(:created_at).count %>
+    <% elsif params[:period].present? and params[:period] == 'Tydzien' %>
+      <%= column_chart @converted_leads.group_by_week(:created_at).count %>
+    <% else %>
+      <%= column_chart @converted_leads.group_by_day(:created_at).count %>
+    <% end %>
+  </div>
+</div>

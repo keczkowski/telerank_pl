@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :screenplays
   resources :questions
   resources :leads
+  get 'sales' => 'leads#sales', as: 'sales'
+  get 'financial' => 'leads#financial', as: 'financial'
   get 'questions/up/:id' => 'questions#up', as: 'up'
   get 'questions/down/:id' => 'questions#down', as: 'down'
   resources :partners
@@ -24,7 +26,6 @@ Rails.application.routes.draw do
                                                sign_up: 'signup' }
 
   get "home/index"
-  get "home/minor"
 
   root to: 'home#index'
 
