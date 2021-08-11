@@ -25,6 +25,7 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'cancancan'
 gem "chartkick"
 gem 'groupdate'
+gem 'jwt'
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

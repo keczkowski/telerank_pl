@@ -7,7 +7,7 @@ class Client < ApplicationRecord
   has_many :agreements, :dependent => :restrict_with_error
   has_many :events, :dependent => :restrict_with_error
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   after_create :create_event1
   after_update :create_event2

@@ -43,7 +43,7 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        format.html { redirect_to @client, notice: 'Klient został dodany do bazy.' }
+        format.html { redirect_to @client, notice: 'Lead został dodany do bazy.' }
         format.json { render :show, status: :created, location: @client }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class ClientsController < ApplicationController
     @client.user_id = current_user.id
     respond_to do |format|
       if @client.update(client_params)
-        format.html { redirect_to @client, notice: 'Klient zostal zaktualizowany.' }
+        format.html { redirect_to @client, notice: 'Lead zostal zaktualizowany.' }
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit }
@@ -72,7 +72,7 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     respond_to do |format|
-      format.html { redirect_to clients_url, notice: 'Klient został usunięty.' }
+      format.html { redirect_to clients_url, notice: 'Lead został usunięty.' }
       format.json { head :no_content }
     end
   end
@@ -85,6 +85,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:imie, :nazwisko, :numer_telefonu, :email, :miasto, :kod, :adres, :user_id)
+      params.require(:client).permit(:imie, :nazwisko, :numer_telefonu, :email, :miasto, :kod, :adres, :user_id, :zainteresowanie_usluga, :zrodlo)
     end
 end

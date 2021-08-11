@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  # api_login
+  match "/api_login" => "api_actions#login", :via => :post, :as => :bot_login
+  match "/api_add_lead" => "api_actions#add_lead", :via => :post, :as => :bot_movies
+
   resources :events
   resources :agreements
   resources :reminders
