@@ -8,7 +8,7 @@ class ApiActionsController < ApplicationController
     password = params[:password]
     user = User.find_by(email: email)
     if user.valid_password?(password)
-      jwt = JWT.encode({user_id: user.id}, Rails.application.credentials.secret_key_base, 'HS256')
+      jwt = JWT.encode({user_id: user.id}, Rails.application.secret_key_base, 'HS256')
       render json: { jwt: jwt }
     else
       render json: {error: 'not authenticated'}
@@ -17,7 +17,7 @@ class ApiActionsController < ApplicationController
 
   def add_lead # dodaje nowy lead dla wyslanych danych { jwt: 'jakies jwt', imie: 'jakies imie', ... } zwraca dodamu lead w json
     jwt = params[:jwt]
-    decoded_token = JWT.decode(jwt, Rails.application.credentials.secret_key_base, 'HS256')
+    decoded_token = JWT.decode(jwt, Rails.application.secret_key_base, 'HS256')
     if decoded_token
       lead = Client.new
       lead.imie = params[:imie] if params[:imie].present?
